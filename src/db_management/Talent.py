@@ -1,5 +1,5 @@
-from utils.hash_func import get_name_hash
-from utils.lang_operations import EN, RU, get_template
+from src.db_management.utils.hash_func import get_name_hash
+from src.db_management.utils.lang_operations import EN, RU, get_template
 
 
 class Talent:
@@ -9,11 +9,15 @@ class Talent:
         self.max_picked = get_template()
         self.checks = get_template()
         self.desc = get_template()
-        self.checks_desk = get_template()
+        self.checks_desc = get_template()
         self.table_link = get_template()
         self.example = get_template()
         self.spec = get_template()
         self.meta = get_template()
+        self.langs_available = {EN: False, RU: False}
+
+    def get_en_fields(self):
+        return self.__dict__
 
     def set_lang_version(self, lang, name, max_picked, desc, checks=None, checks_desc=None,
                          table_link=None, example=None, spec=None, meta=None):
@@ -23,12 +27,12 @@ class Talent:
         self.max_picked[lang] = max_picked
         self.desc[lang] = desc
         self.checks[lang] = checks
-        self.checks_desk[lang] = checks_desc
+        self.checks_desc[lang] = checks_desc
         self.table_link[lang] = table_link
         self.example[lang] = example
         self.spec[lang] = spec
         self.meta[lang] = meta
-        print(self.__dict__)
+        self.langs_available[lang] = True
 
     def add_talent_by_lang(self, rules_db, lang):
         args = (
@@ -36,7 +40,7 @@ class Talent:
             self.name[lang],
             self.max_picked[lang],
             self.checks[lang],
-            self.checks_desk[lang],
+            self.checks_desc[lang],
             self.desc[lang],
             self.table_link[lang],
             self.example[lang],

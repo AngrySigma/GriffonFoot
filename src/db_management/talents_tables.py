@@ -1,7 +1,7 @@
 import sqlite3
-from Talent import Talent
-from rules_db import *
-from utils.lang_operations import EN, RU
+from src.db_management.Talent import Talent
+from src.db_management.rules_db import *
+from src.db_management.utils.lang_operations import EN, RU
 
 
 if __name__ == "__main__":

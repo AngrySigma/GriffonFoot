@@ -1,6 +1,6 @@
 import sqlite3
 from os.path import join
-from utils.lang_operations import EN, RU
+from src.db_management.utils.lang_operations import EN, RU
 
 LANGS = (EN, RU)
 DATABASE_PATH = join('databases', 'rules.db')
