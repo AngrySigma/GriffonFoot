@@ -1,11 +1,12 @@
 import sqlite3
+from os.path import join
+from utils.lang_operations import EN, RU
 
-EN = 'en'
-RU = 'ru'
-DATABASE_PATH = r'databases/rules.db'
+LANGS = (EN, RU)
+DATABASE_PATH = join('databases', 'rules.db')
 
 
-def create_skills_tables(rules_db, langs):
+def create_skill_tables(rules_db, langs):
     for lang in langs:
         sql_create_skills_table = f"""CREATE TABLE IF NOT EXISTS skills_{lang} (
                                             en_name_hash text PRIMARY KEY, 
@@ -19,12 +20,12 @@ def create_skills_tables(rules_db, langs):
         rules_db.execute(sql_create_skills_table)
 
 
-def create_talents_table(rules_db, langs):
+def create_talent_table(rules_db, langs):
     for lang in langs:
         sql_create_skills_table = f"""CREATE TABLE IF NOT EXISTS talents_{lang} (
                                             name_hash text PRIMARY KEY, 
                                             name text NOT NULL, 
-                                            max text, 
+                                            max_picked text, 
                                             checks text, 
                                             checks_description text, 
                                             description text, 
@@ -35,6 +36,5 @@ def create_talents_table(rules_db, langs):
 
 
 if __name__ == '__main__':
-    rules_db = sqlite3.connect(DATABASE_PATH)
-    create_talents_table(rules_db, (EN, RU))
-    rules_db.close()
+    with sqlite3.connect(DATABASE_PATH) as rules_db:
+        create_talent_table(rules_db, LANGS)
