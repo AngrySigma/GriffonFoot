@@ -3,7 +3,23 @@ from src.db_management.utils.lang_operations import EN, RU, get_template
 
 
 class Talent:
+    """ Talent class """
+
     def __init__(self):
+        """ Creates empty Talent. Every attribute has empty lang template {EN: None, RU: None}
+        Args:
+        name_hash (hash): generates by talent name\n
+        name (str): talent name. all letters lowered and words separated by space\n
+        max_picked (int/str/None): max times picked talent. can be connected with Characteristic\n
+        checks (str/None): talent tests. can be connected with Skill\n
+        desc (str): talent description\n
+        checks_desc (str): talents test description\n
+        table_link (str/None): has table name with talent additional info if exists\n
+        example (str): talent usage example\n
+        spec (str/None): has table name with talent specs if exists\n
+        meta (str/None): talent meta info\n
+        langs_available (dict): has info if talent is available on EN or RU
+        """
         self.name_hash = None
         self.name = get_template()
         self.max_picked = get_template()
